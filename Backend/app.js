@@ -43,6 +43,6 @@ app.listen(PORT, () => {
   console.log(`Server has started on port: ${PORT}`);
 });
 
-cron.schedule("55 14 * * *", () => {
+cron.schedule("21 13 * * *", () => {
   notificationWorker();
 });

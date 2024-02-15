@@ -3,6 +3,7 @@ const Message = require("../models/messages");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const messagingSID = process.env.TWILIO_MESSAGING_SERVICE_SID;
+const messagingnumber = process.env.TWILIO_PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const { MessagingResponse } = require('twilio').twiml;
 
@@ -350,9 +351,10 @@ exports.deleteMessage = (req,res) => {
 }
 
 exports.sendMessage = (req,res) => {
+    console.log(req.body)
     client.messages.create({
         to: req.body.number,
-        from: messagingSID,
+        from: messagingnumber,
         body: req.body.message
     })
     .then(data => {
@@ -361,6 +363,7 @@ exports.sendMessage = (req,res) => {
         })
     })
     .catch(err => {
+        console.log(err);
         res.status(500).json({
             message : "Server Error"
         });

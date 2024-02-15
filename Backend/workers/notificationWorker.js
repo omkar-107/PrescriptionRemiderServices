@@ -3,6 +3,7 @@ const User = require("../models/user");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const messagingSID = process.env.TWILIO_MESSAGING_SERVICE_SID;
+const messagingnumber = process.env.TWILIO_PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
 const getString = (dayOfWeek) => {
@@ -40,7 +41,7 @@ const notificationWorker = () => {
             servingData.map(data => {
                 return client.messages.create({
                     to: data.number,
-                    from: messagingSID,
+                    from: messagingnumber ,
                     body: data.message
                 });
             })
